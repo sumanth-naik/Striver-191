@@ -10,7 +10,7 @@ class TreeNode:
 
 class MedianFinder:
 
-    def __init__(self):
+    def __init__(self):  
         self.root = None
         self.totalCount = 0
         
