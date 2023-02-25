@@ -16,5 +16,4 @@ def maxPointsOnALine(points):
                     slopeAndInterceptCounts[(slope,intercept)] = 0
                 slopeAndInterceptCounts[(slope,intercept)] += 1
     maxCount = max(slopeAndInterceptCounts.values())
-    print(slopeAndInterceptCounts)
     return (int)(sqrt(1+4*maxCount)+1)//2
