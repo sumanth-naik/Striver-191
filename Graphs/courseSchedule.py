@@ -23,3 +23,42 @@ class Solution:
                 if not dfs(course, set()): return False
 
         return True
+
+class Solution:
+    def canFinish(self, numCourses, prerequisites):
+
+        adjList = [[] for _ in range(numCourses)]
+        reversedAdjList = [[] for _ in range(numCourses)]
+        for course, prereq in prerequisites:
+            if course==prereq: return False
+            adjList[prereq].append(course)
+            reversedAdjList[course].append(prereq)
+
+        visited, stronglyConnectedComponentsOrderStack = set(), []
+        def dfs(node):
+            nonlocal visited, stronglyConnectedComponentsOrderStack
+            visited.add(node)
+            for neigh in adjList[node]:
+                if neigh not in visited:
+                    dfs(neigh)
+            stronglyConnectedComponentsOrderStack.append(node)
+
+        for course in range(numCourses):
+            if not course in visited:
+                dfs(course)
+
+        kosarajusAlgoVisited = set()
+        def kosarajusAlgo(node):
+            nonlocal kosarajusAlgoVisited
+            kosarajusAlgoVisited.add(node)
+            for neigh in reversedAdjList[node]:
+                if neigh not in kosarajusAlgoVisited:
+                    kosarajusAlgo(neigh)
+
+        numStronglyConnectedComponents = 0
+        for course in reversed(stronglyConnectedComponentsOrderStack):
+            if course not in kosarajusAlgoVisited:
+                numStronglyConnectedComponents += 1
+                kosarajusAlgo(course)
+
+        return numStronglyConnectedComponents==numCourses
