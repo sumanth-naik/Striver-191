@@ -1,0 +1,187 @@
+ %% start of file `template.tex'.
+%% Copyright 2006-2013 Xavier Danaux (xdanaux@gmail.com).
+%
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License version 1.3c,
+% available at http://www.latex-project.org/lppl/.
+
+
+\documentclass[11pt,a4paper,sans]{moderncv}        % possible options include font size ('10pt', '11pt' and '12pt'), paper size ('a4paper', 'letterpaper', 'a5paper', 'legalpaper', 'executivepaper' and 'landscape') and font family ('sans' and 'roman')
+
+\usepackage{multicol}
+
+% modern themes
+\moderncvstyle{banking}                            % style options are 'casual' (default), 'classic', 'oldstyle' and 'banking'
+\moderncvcolor{blue}                                % color options 'blue' (default), 'orange', 'green', 'red', 'purple', 'grey' and 'black'
+%\renewcommand{\familydefault}{\sfdefault}         % to set the default font; use '\sfdefault' for the default sans serif font, '\rmdefault' for the default roman one, or any tex font name
+%\nopagenumbers{}                                  % uncomment to suppress automatic page numbering for CVs longer than one page
+
+% character encoding
+\usepackage[utf8]{inputenc}                       % if you are not using xelatex ou lualatex, replace by the encoding you are using
+%\usepackage{CJKutf8}                              % if you need to use CJK to typeset your resume in Chinese, Japanese or Korean
+
+% adjust the page margins
+%\usepackage[scale=0.8]{geometry}
+ \usepackage[left=1.1cm, right=1.6cm, top=1.3cm, bottom=1cm]{geometry}
+%\setlength{\hintscolumnwidth}{3cm}                % if you want to change the width of the column with the dates
+%\setlength{\makecvheadnamewidth}{10cm}           % for the 'classic' style, if you want to force the width allocated to your name and avoid line breaks. be careful though, the length is normally calculated to avoid any overlap with your personal info; use this at your own typographical risks...
+\definecolor{blue}{rgb}{0,0.3,0.8}
+
+\usepackage{import}
+% personal data
+\name{Sumanth Naik} {Vadthyavath}
+% optional, remove / comment the line if not wanted; the "postcode city" and and "country" arguments can be omitted or provided empty
+\phone[mobile]{+918919247538}      % optional, remove / comment the line if not wanted
+%\phone[fixed]{01234 123456}                    % optional, remove / comment the line if not wanted
+%\phone[fax]{+3~(456)~789~012}                      % optional, remove / comment the line if not wanted
+\email{sumanthnaik1@gmail.com}                               % optional, remove / comment the line if not wanted 
+% \extrainfo{\faMapMarker \href{https://www.google.com/maps/place/Hyderabad,+Telangana/@17.1588822,77.9100611,7.51z}{  \textcolor{blue}{  Hyderabad, India}}}
+% \extrainfo{\faIcon{link} 
+\extrainfo{\faIcon{code} \href{https://leetcode.com/sumanthnaik1/}{Leetcode}}
+% \homepage{https://leetcode.com/sumanthnaik1/}
+
+% optional, remove / comment the line if not wanted
+%\extrainfo{additional information}                 % optional, remove / comment the line if not wanted
+%\photo[64pt][0.4pt]{picture}                       % optional, remove / comment the line if not wanted; '64pt' is the height the picture must be resized to, 0.4pt is the thickness of the frame around it (put it to 0pt for no frame) and 'picture' is the name of the picture file
+%\quote{Some quote}                                 % optional, remove / comment the line if not wanted
+% to show numerical labels in the bibliography (default is to show no labels); only useful if you make citations in your resume
+%\makeatletter
+%\renewcommand*{\bibliographyitemlabel}{\@biblabel{\arabic{enumiv}}}
+%\makeatother
+%\renewcommand*{\bibliographyitemlabel}{[\arabic{enumiv}]}% CONSIDER REPLACING THE ABOVE BY THIS
+% bibliography with mutiple entries
+%\usepackage{multibib}
+%\newcites{book,misc}{{Books},{Others}}
+%----------------------------------------------------------------------------------
+%            content
+%----------------------------------------------------------------------------------
+\begin{document}
+%\begin{CJK*}{UTF8}{gbsn}                          % to typeset your resume in Chinese using CJK
+%-----       resume       ---------------------------------------------------------
+\makecvtitle 
+\vspace{-1.3cm}
+
+\section{Skillset}
+\vspace{-15pt}
+
+\begin{multicols}{2}
+\begin{itemize}
+\item \textbf{Languages:} Java, Python, JavaScript, C/C++
+\vspace{3pt}
+\item \textbf{Frameworks:} Spring, Jest, PowerMock, LWC, Aura 
+\item \textbf{Databases:} MySQL, PostgreSQL
+\vspace{3pt}
+\item \textbf{Tools:} Git, Perforce
+\end{itemize}
+\end{multicols}
+\begin{itemize}
+\vspace{-8pt}
+\item \textbf{Platforms/Softwares:} IntelliJ, VS Code, MacOS, LinuxOS, G Suite, Quip, Slack
+\end{itemize}
+
+\vspace{-6pt}
+
+
+
+
+\section{Work/Internship Experience}
+\vspace{1pt} 
+\begin{itemize}
+
+\item{\cventry{June 2021 -- Present}{Member of Technical Staff}{Salesforce (Hyderabad)}{ }{}{\vspace{3pt} 
+\begin{itemize}
+\item{ \textbf{Actionable Lists}
+\begin{itemize}
+\vspace{2pt}
+% \item \textbf{Designed APIs} and worked on implementation in both backend and frontend for a feature called Actionable Lists, which enables user to take actions on records that are selected from a de-normalised dataset stored in Tableau which is created by joining muliplte entites from Salesforce Core. 
+\item Streamlined the process of\textbf{ linking Tableau} which is run in a Kubernetes cluster \textbf{with Salesforce's Core} in local machine and created an \textbf{in-depth document} for the end-to-end setup which spans more than 40 pages with all the steps and troubleshooting guide. This document alone has reduced the \textbf{setup time from} well over \textbf{2 weeks to 2 days} and it is now the official document for end-to-end setup across the company. After understanding the architecture, designed and implemented a \textbf{distributed architecture based approach} with automated scripts in bash and python where a machine hosts the Tableau server and other dev machines connect to it which reduced the time further to \textbf{under 10min}. \textit{[Systems Design, Networking, Kubernetes, Python, bash] }
+\item Implemented an approach which was designed for adding upto \textbf{10K records} to an Actionable List \textbf{using chaining/tarzaning scaling strategy} in Salesforce's MQ Framework. Designed, proposed and implemented a \textbf{new solution} which can scale up to adding \textbf{1M+} records with an approach which can get exponentially more data with near linear cost within a constant number of rows that endpoint returns. Leveraged Salesforce's existing Bulk API to save the records and MQ framework with long polling to mark the job completed. \textit{[Systems Design, Java, SAQL]}
+\item  \textbf{Designed APIs} that UI needs and \textbf{implemented UI} for picking records for an Actionable List which involved using existing data-table component and creating a new dynamic filter panel from scratch to support filtering on multiple fields which can vary based on the dataset user chose. Implemented it as a cart-like experience where the selected records from multiple filtered subsets are persisted through out the session and saved at the end. \textit{[API Design, LWC(Salesforce frontend framework), Jest]}
+\item \textbf{Analysed} the \textbf{two query languages (SQL and SAQL)} that Tableau supports by writing down all the possible queries that we plan to make and decided pros and cons of each approach \textbf{and eventually settled on using SAQL}. Wrote a SAQL Builder class which creates SAQL query at runtime from the input that we receive from the APIs. \textit{[SQL, SAQL, Java, Powermock]}
+\end{itemize}
+}
+\vspace{3pt}
+\item{ \textbf{Recurrence Schedule}
+\begin{itemize}
+\vspace{2pt}
+\item  Implemented a \textbf{Strategy Design Pattern based flexible and reusable feature} called Recurrence Schedule (similar to Recurring events in Google Calendar) which can be used by any other team as well to automate things like creation of entities according to some recurrence or any other business requirement which involves running something at certain time intervals. \textit{[Design Patterns, Java, Spring Framework]}
+\item \textbf{Implemented UI} to take in the recurrence type from user and associate it with a parent entity which can then implement custom business logic when a cron job is run based on the recurrence specified.  \textit{[Aura(Salesforce frontend framework), LWC, Jest]}
+\end{itemize}
+}
+% \item Implemented a Reordering functionality with persistence for Tasks  where the end user can specify a new order in UI by dragging and dropping.
+\end{itemize}
+}}
+
+\vspace{3pt}
+
+\item{\cventry{May 2020 -- July 2020}{\href{https://drive.google.com/file/d/1V1atnrgi_RulWsFQsUEufDRNKX4qY-FE/view?usp=share_link}{\textcolor{blue}{Remote Software Engineering Intern}}}{Salesforce}{}{}{\vspace{3pt}
+\begin{itemize}
+\item{ \textbf{Rule based engine}
+\begin{itemize}
+\vspace{2pt}
+\item  Worked on a POC for optimising current implementation of loyalty points allotment(which are based on certain set of rules). Collaborated within a team of 4 and came up with \textbf{two solutions} based on \textbf{Decision Trees and Rete Networks} concepts in Machine Learning. After analysing both, decided to implement both as each fits a different use case and ran performance tests. Also \textbf{ideated a possible solution} for making Decision tree solution more scalable \textbf{using distributed systems}.\textit{ [Java, Spring Boot, ML]}
+\end{itemize}
+}
+\end{itemize}
+}}
+
+\vspace{3pt}
+\vspace{3pt}
+
+\item{\cventry{May 2018 - June 2018}{\href{https://drive.google.com/file/d/1PqYtt6dUfg_02TAV9T_iponkPsy_lg7K/view?usp=share_link}{\textcolor{blue}{Remote Internship under Prof. Rupesh Nasre}}}{IIT Madras}{}{}{\vspace{3pt}
+\begin{itemize}
+\item{\textbf{ Cryptography Algorithms Implementation}
+\begin{itemize}
+\vspace{2pt}
+\item  Implemented \textbf{Advanced Encryption Standard(AES-128)} which is a block cipher which can encrypt and decrypt data of any length with a private key by chunking into 128 bit blocks. \textit{[Python]}
+\end{itemize}
+}
+\end{itemize}
+}}
+
+\vspace{-9pt}
+
+\end{itemize}
+
+
+\section{Education}
+
+\begin{itemize}
+
+\item{\cventry{Aug 2017 -- May 2021}{B.Tech in Computer Science and Engineering with CGPA of \href{https://drive.google.com/file/d/12vU_qPd7UTn_FLFi1o2kahYK21wQwQUX/view?usp=share_link}{\textcolor{blue}{8.34}}/10}{Indian Institute of Technology, Madras}{}{}{}}
+\end{itemize}
+\vspace{-9pt}
+
+% \section{Interests and Activities}
+
+% \vspace{-1pt}
+% \small
+% \begin{itemize}
+% \item{ Keen problem solver interested in solving all kinds of puzzles and enjoys solving DSA in \href{https://leetcode.com/sumanthnaik1/}{\textcolor{blue}{Leetcode}}
+% \item Also interested in playing Piano and Weight training
+% % \item Skilled artist with special interest in face  portraits and photo-realism.
+% \end{itemize}
+% \vspace{1pt}
+
+% Publications from a BibTeX file without multibib
+%  for numerical labels: \renewcommand{\bibliographyitemlabel}{\@biblabel{\arabic{enumiv}}}% CONSIDER MERGING WITH PREAMBLE PART
+%  to redefine the heading string ("Publications"): \renewcommand{\refname}{Articles}
+\nocite{*}
+\bibliographystyle{plain}
+\bibliography{publications}                        % 'publications' is the name of a BibTeX file
+
+% Publications from a BibTeX file using the multibib package
+%\section{Publications}
+%\nocitebook{book1,book2}
+%\bibliographystylebook{plain}
+%\bibliographybook{publications}                   % 'publications' is the name of a BibTeX file
+%\nocitemisc{misc1,misc2,misc3}
+%\bibliographystylemisc{plain}
+%\bibliographymisc{publications}                   % 'publications' is the name of a BibTeX file
+
+%-----       letter       ---------------------------------------------------------
+
+\end{document}
+
+
+%% end of file `template.tex'.

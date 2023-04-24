@@ -7,7 +7,7 @@ class TreeNode:
         self.currNumCount = currNumCount
         self.rightSubtreeCount = rightSubtreeCount
 
-
+# TLE 
 class MedianFinder:
 
     def __init__(self):  
@@ -64,3 +64,31 @@ class MedianFinder:
             self.preOrder(node.right)
 
             
+import heapq
+class MedianFinder:
+
+    def __init__(self):
+        # store one more in maxHeap if total is odd
+        self.maxHeap, self.minHeap = [], []     
+
+    def addNum(self, num: int) -> None:
+        if not self.maxHeap or -self.maxHeap[0]>=num: 
+            heapq.heappush(self.maxHeap, -num)
+        else: 
+            heapq.heappush(self.minHeap, num)
+
+        if len(self.minHeap)>len(self.maxHeap): 
+            heapq.heappush(self.maxHeap, -heapq.heappop(self.minHeap))
+        if len(self.maxHeap)>1+len(self.minHeap):
+            heapq.heappush(self.minHeap, -heapq.heappop(self.maxHeap))
+
+    def findMedian(self) -> float:
+        if not self.minHeap: return -self.maxHeap[0]
+        if len(self.minHeap)==len(self.maxHeap): return (-self.maxHeap[0]+self.minHeap[0])/2
+        else: return -self.maxHeap[0]
+
+
+# Your MedianFinder object will be instantiated and called as such:
+# obj = MedianFinder()
+# obj.addNum(num)
+# param_2 = obj.findMedian()
