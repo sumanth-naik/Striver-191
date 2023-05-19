@@ -17,3 +17,20 @@ def maxPointsOnALine(points):
                 slopeAndInterceptCounts[(slope,intercept)] += 1
     maxCount = max(slopeAndInterceptCounts.values())
     return (int)(sqrt(1+4*maxCount)+1)//2
+
+class Solution:
+    def maxPoints(self, points: List[List[int]]) -> int:
+        
+        def getSlope(x1, y1, x2, y2):
+            num, den = (y2-y1), (x2-x1)
+            if den==0: return -float('inf')
+            return round(num/den, 10)
+        
+        maxPoints = 0
+        for x1, y1 in points:
+            slopesMap = defaultdict(int)
+            for x2, y2 in points: 
+                if (x1,y1)!=(x2,y2):
+                    slopesMap[getSlope(x1,y1,x2,y2)] += 1
+            maxPoints = max(maxPoints, max(slopesMap.values() or [0]))
+        return maxPoints+1

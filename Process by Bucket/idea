@@ -1,0 +1,5 @@
+https://leetcode.com/problems/number-of-matching-subsequences/solutions/1290406/c-java-python-process-by-bucket-picture-explain-o-n-s/?orderBy=most_votes
+
+Its similar to trie but we dont search same substrings again and again if they occur in different branches
+Usually use hashmap
+Identify it when you need to search multiple subsequences in parallel

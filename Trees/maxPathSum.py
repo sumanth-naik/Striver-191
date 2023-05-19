@@ -12,3 +12,22 @@ def binaryTreeMaxPathSum(node):
     subTreeMax = max(max(max(leftSubTreeMaxBranchSum + rightSubTreeMaxBranchSum + node.val, node.val), leftSubTreeMaxBranchSum + node.val), rightSubTreeMaxBranchSum + node.val)
     return max(max(leftSubTreeMaxBranchSum + node.val, rightSubTreeMaxBranchSum + node.val), node.val), max(subTreeMax, max(leftSubTreeMaxPathSum, rightSubTreeMaxPathSum))
  
+
+class Solution:
+    def maxPathSum(self, root: Optional[TreeNode]) -> int:
+        maxSumSeen = -1e9
+
+        def dfs(node):
+            nonlocal maxSumSeen
+            if not node: return -1e9
+            leftSubtreeMax = dfs(node.left)
+            rightSubtreeMax = dfs(node.right)
+            onlyNode = node.val
+            nodeAndLeft = node.val + leftSubtreeMax
+            nodeAndRight = node.val + rightSubtreeMax
+            nodeAndBoth = node.val + leftSubtreeMax + rightSubtreeMax
+            maxSumSeen = max(maxSumSeen, onlyNode, nodeAndLeft, nodeAndRight, nodeAndBoth)
+            return max(onlyNode, nodeAndLeft, nodeAndRight)
+        dfs(root)
+        return maxSumSeen
+

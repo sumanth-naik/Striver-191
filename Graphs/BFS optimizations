@@ -1,0 +1,17 @@
+1. If possible instead of checking in visited set, just remove the link
+    a. Like if you are searching in a set, like in 127. Word Ladder, just remove from that dict itself of using visited set
+2. Use meet in the middle technique if needed (begin from start and end simultaneously..)
+    a. Careful to check that start and end node are in the graph before starting
+3. Think if there is any other way to get neighs 
+    a. Like in 127. Word Ladder, instead of searching the set, use character combinations technique to check edge
+4. Add to visited when you add to queue and not when you pop
+5. Add more probable elements if any to front of the queue
+    a. Like in  Minimum Obstacles to Remove, Add elements with least numBreaks to front of queue and with more numBreaks to last of queue
+6. In case of grid BFS, like in Minimum Obstacles to Remove,
+    1. Dont use weak bound. 
+        a.  numBreaks <= m*n-1
+        b.  numBreaks <= i + di + j + dj + 1
+        Both are correct but unnecessaryily increasing time complexity
+    2. Use a matrix to store the minNumBreaks that we see so far on that index. Dont add anything bigger or equal - like in Djikstra's
+    3. DONT use DLRU everytime. When its a matrix moving from top left to bottom right, use DRLU
+

@@ -119,6 +119,23 @@ maxRectangleinHistogramSinglePassSolver(histogramArr)
 
 
 
+class Solution:
+    def largestRectangleArea(self, histogramArr: List[int]) -> int:
+        histogramArr = [0] + histogramArr + [0]
+        # height, index
+        stack, maxRectangleAreaSeen = [], 0
+
+        for index, height in enumerate(histogramArr):
+            while stack and stack[-1][0]>height:
+                poppedElemHeight, poppedElemIndex = stack.pop()
+                smallerFirstLeftElemHeight, smallerFirstLeftElemIndex = stack[-1]
+                smallerFirstRightElemHeight, smallerFirstRightElemIndex = height, index
+                width = smallerFirstRightElemIndex - smallerFirstLeftElemIndex - 1
+                maxRectangleAreaSeen = max(maxRectangleAreaSeen, width*poppedElemHeight)
+            stack.append((height, index))
+
+        return maxRectangleAreaSeen
+
 
 
 

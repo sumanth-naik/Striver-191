@@ -42,6 +42,7 @@ for x in dp:
     
 print(dp[n][e])
 
+from functools import cache
 
 class Solution:
     def twoEggDrop(self, n: int) -> int:
@@ -119,3 +120,4 @@ class Solution:
                 dpMoves[eggs] = dpMovesMinusOne[eggs-1] + 1 + dpMovesMinusOne[eggs]
                 if dpMoves[eggs]>=n: return moves
             dpMovesMinusOne = dpMoves
+
