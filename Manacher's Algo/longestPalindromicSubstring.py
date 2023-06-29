@@ -19,6 +19,22 @@ class Solution:
 
         return s[longestPalindromeTuple[0]:longestPalindromeTuple[1] + 1]
 
+class Solution:
+    def longestPalindrome(self, s: str) -> str:
+        longestPalindromeTuple, n = (0, 0), len(s)
+        for i in range(n):
+            right = left = i
+            while right+1 < n and s[i] == s[right+1]:
+                right += 1
+
+            while left-1 >= 0 and right+1 < n and s[left-1] == s[right+1]:
+                left -= 1
+                right += 1
+
+            if longestPalindromeTuple[1] - longestPalindromeTuple[0] < right - left:
+                longestPalindromeTuple = (left, right)
+
+        return s[longestPalindromeTuple[0]:longestPalindromeTuple[1] + 1]
 
 #         n = len(s)
 #         dp1 = [1 for _ in range(n)]
@@ -159,5 +175,8 @@ class Solution:
                 right = index+lpsArr[index]
 
         maxLen, centerIndex = max((l, i) for i,l in enumerate(lpsArr))
-        return ''.join(newStr[index] for index in range(centerIndex-maxLen, centerIndex+maxLen) if newStr[index]!="#")
-
+        # return ''.join(newStr[index] for index in range(centerIndex-maxLen, centerIndex+maxLen) if newStr[index]!="#")
+        # (centerIndex//2) - 1 maps from newStr to s chars
+        # (maxLen-1)//2 (-1 is needed for even case)
+        startIndex = (centerIndex//2) - 1 - (maxLen-1)//2
+        return s[startIndex:startIndex+maxLen]

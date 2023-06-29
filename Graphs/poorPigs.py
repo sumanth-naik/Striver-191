@@ -19,3 +19,15 @@ class Solution:
             if numBuckets(numPigs, lives)>=buckets: return numPigs
             numPigs += 1
             
+
+class Solution:
+    def poorPigs(self, buckets: int, minutesToDie: int, minutesToTest: int) -> int:
+        # round is necessary as division may not be precise
+        return ceil(round(log(buckets)/(log(minutesToTest//minutesToDie+1)), 5)) 
+    
+            
+
+class Solution:
+    def poorPigs(self, buckets: int, minutesToDie: int, minutesToTest: int) -> int:
+        # round is necessary as division may not be precise
+        return ceil(round(log(buckets, minutesToTest//minutesToDie+1), 5)) 

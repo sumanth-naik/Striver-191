@@ -63,3 +63,29 @@ def palindromesAtIndex(s, ind, length):
     lpsArr = manachers(s)
     return sum(1 for index in range(2, len(lpsArr)) if index - lpsArr[index]==1 and lpsArr[index]>=length)
 
+
+
+
+
+
+def palindromesAtIndex(s, ind, length):
+    s = s[ind-1:]
+
+    def palindromesLengthsFromBeginning(s):
+        kmpString = s+"#"+s[::-1]
+
+        lpsArr, prevLpsLength = [0 for _ in range(len(kmpString))], 0
+        for index in range(1, len(lpsArr)):
+            while prevLpsLength!=0 and kmpString[index]!=kmpString[prevLpsLength]:
+                prevLpsLength = lpsArr[prevLpsLength-1]
+            if kmpString[index]==kmpString[prevLpsLength]:
+                prevLpsLength+=1
+                lpsArr[index] = prevLpsLength
+
+        palindromesLengths, lpsIndex = [lpsArr[-1]], lpsArr[-1]-1
+        while lpsArr[lpsIndex]>0:
+            palindromesLengths.append(lpsArr[lpsIndex])
+            lpsIndex = lpsArr[lpsIndex-1]
+        return palindromesLengths
+
+    return sum(1 for l in palindromesLengthsFromBeginning(s) if l>=length)

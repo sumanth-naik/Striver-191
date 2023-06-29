@@ -20,46 +20,65 @@ class Solution:
         # #return possiblePartitions
 
 
-        def kmpAlgoForPalindromeDetection(string):
-            totalString = string + '#' + string[::-1]
-            lpsLengthsArray, prevLpsLength = [0], 0
-            for index in range(1,len(totalString)):
-                while prevLpsLength!=0 and totalString[prevLpsLength]!=totalString[index]:
-                    prevLpsLength = lpsLengthsArray[prevLpsLength-1]
-                if totalString[prevLpsLength]==totalString[index]:
-                    prevLpsLength += 1
-                lpsLengthsArray.append(prevLpsLength)
+        # def kmpAlgoForPalindromeDetection(string):
+        #     totalString = string + '#' + string[::-1]
+        #     lpsLengthsArray, prevLpsLength = [0], 0
+        #     for index in range(1,len(totalString)):
+        #         while prevLpsLength!=0 and totalString[prevLpsLength]!=totalString[index]:
+        #             prevLpsLength = lpsLengthsArray[prevLpsLength-1]
+        #         if totalString[prevLpsLength]==totalString[index]:
+        #             prevLpsLength += 1
+        #         lpsLengthsArray.append(prevLpsLength)
             
-        memo = {}
-        def getAllPalindromesLengthsStartingFromFirstElement(string):
-            if string in memo:
-                return memo[string]
-            totalString = string + '#' + string[::-1]
-            lpsLengthsArray, prevLpsLength, lengthsMap = [0], 0, {}
-            for index in range(1,len(totalString)):
-                while prevLpsLength!=0 and totalString[prevLpsLength]!=totalString[index]:
-                    prevLpsLength = lpsLengthsArray[prevLpsLength-1]
-                if totalString[prevLpsLength]==totalString[index]:
-                    prevLpsLength += 1
-                lpsLengthsArray.append(prevLpsLength)
-                if index>len(totalString)//2:
-                    lengthsMap[prevLpsLength] = index
-            palindromesLengthsStartingFromFirstElement = [1]
-            for length in range(2, lpsLengthsArray[-1]):
-                index = len(totalString) - lengthsMap[length] - 1 + length - 1
-                while lpsLengthsArray[index]>length:
-                    index = lpsLengthsArray[index] - 1
-                if lpsLengthsArray[index]==length:
-                    palindromesLengthsStartingFromFirstElement.append(length)
-            memo[string] = set(palindromesLengthsStartingFromFirstElement + [lpsLengthsArray[-1]])
-            return memo[string]
+        # memo = {}
+        # def getAllPalindromesLengthsStartingFromFirstElement(string):
+        #     if string in memo:
+        #         return memo[string]
+        #     totalString = string + '#' + string[::-1]
+        #     lpsLengthsArray, prevLpsLength, lengthsMap = [0], 0, {}
+        #     for index in range(1,len(totalString)):
+        #         while prevLpsLength!=0 and totalString[prevLpsLength]!=totalString[index]:
+        #             prevLpsLength = lpsLengthsArray[prevLpsLength-1]
+        #         if totalString[prevLpsLength]==totalString[index]:
+        #             prevLpsLength += 1
+        #         lpsLengthsArray.append(prevLpsLength)
+        #         if index>len(totalString)//2:
+        #             lengthsMap[prevLpsLength] = index
+        #     palindromesLengthsStartingFromFirstElement = [1]
+        #     for length in range(2, lpsLengthsArray[-1]):
+        #         index = len(totalString) - lengthsMap[length] - 1 + length - 1
+        #         while lpsLengthsArray[index]>length:
+        #             index = lpsLengthsArray[index] - 1
+        #         if lpsLengthsArray[index]==length:
+        #             palindromesLengthsStartingFromFirstElement.append(length)
+        #     memo[string] = set(palindromesLengthsStartingFromFirstElement + [lpsLengthsArray[-1]])
+        #     return memo[string]
+
+        @lru_cache(None)
+        def getAllPalindromesLengthsStartingFromFirstElement(index):
+            sPart = s[index:]
+            kmpString = sPart+"#"+sPart[::-1]
+
+            lpsArr, prevLpsLength = [0 for _ in range(len(kmpString))], 0
+            for index in range(1, len(lpsArr)):
+                while prevLpsLength!=0 and kmpString[index]!=kmpString[prevLpsLength]:
+                    prevLpsLength = lpsArr[prevLpsLength-1]
+                if kmpString[index]==kmpString[prevLpsLength]:
+                    prevLpsLength+=1
+                    lpsArr[index] = prevLpsLength
+
+            palindromesLengths, lpsIndex = [lpsArr[-1]], lpsArr[-1]-1
+            while lpsArr[lpsIndex]>0:
+                palindromesLengths.append(lpsArr[lpsIndex])
+                lpsIndex = lpsArr[lpsIndex-1]
+            return palindromesLengths
 
         possiblePartitions, n = set(), len(s)
         def recursion(index, currPartition):
             if index==n:
                 possiblePartitions.add(tuple(currPartition))
             else:
-                palindromesLengthsStartingFromFirstElement = getAllPalindromesLengthsStartingFromFirstElement(s[index:])
+                palindromesLengthsStartingFromFirstElement = getAllPalindromesLengthsStartingFromFirstElement(index)
                 for palindromeLengthStartingFromFirstElement in palindromesLengthsStartingFromFirstElement:
                     recursion(index+palindromeLengthStartingFromFirstElement, currPartition + [s[index:index+palindromeLengthStartingFromFirstElement]])
 

@@ -53,4 +53,4 @@ class Solution:
         for puzzle in puzzles: 
             counts.append(trie.search(trie, sorted(puzzle), 0, puzzle[0]))
         return counts
-
+        
