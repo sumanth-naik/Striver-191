@@ -62,3 +62,24 @@ class Solution:
                 kosarajusAlgo(course)
 
         return numStronglyConnectedComponents==numCourses
+    
+class Solution:
+    def canFinish(self, numCourses, prerequisites):
+        indegreeArr, adjList, topoSortArr = [0]*numCourses, [[] for _ in range(numCourses)], []
+
+        for after, before in prerequisites:
+            indegreeArr[after] += 1
+            adjList[before].append(after)
+
+        def dfs(node, indegreeArr, topoSortArr):
+            topoSortArr.append(node)
+            indegreeArr[node] = -1
+            for neigh in adjList[node]:
+                indegreeArr[neigh] -= 1
+                if indegreeArr[neigh]==0:
+                    dfs(neigh, indegreeArr, topoSortArr)
+        
+        for node in range(numCourses):
+            if indegreeArr[node]==0:
+                dfs(node, indegreeArr, topoSortArr)
+        return True if len(topoSortArr)==numCourses else False
