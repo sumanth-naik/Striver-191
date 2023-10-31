@@ -26,7 +26,7 @@ def mColoring(index, n, adjList, colorArr):
     for color in range(1, 5):
         if(isValidColoring(index, color, adjList, colorArr)):
             colorArr[index] = color
-            return mColoring(index+1, n, adjList, colorArr)
+            if mColoring(index+1, n, adjList, colorArr): return True
             colorArr[index] = -1
             
     return False

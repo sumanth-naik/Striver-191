@@ -1,3 +1,7 @@
+# Key Idea 1: Binary search on numElementsFromArr1, accordingly define low and high
+# Key Idea 2: monotonicity is on l1<=r2 and l2<=r1 behaviour
+
+# Note: low and high calculation is tricky
 
 class Solution:
     def kthElement(self, arr1, arr2, n, m, k):

@@ -1,3 +1,5 @@
+# Key Idea - Use col and diagonal invariants to check queen position
+
 class Solution:
     def solveNQueens(self, n: int) -> List[List[str]]:
         allBoards, currBoard = [], [['.' for _ in range(n)] for _ in range(n)]

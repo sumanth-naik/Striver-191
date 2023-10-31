@@ -1,3 +1,11 @@
+# Key Idea: Take each num in array and put it in first position
+
+class Solution:
+    def permute(self, arr: List[int]) -> List[List[int]]:
+        return [[num] + others for index, num in enumerate(arr) \
+                for others in self.permute(arr[:index]+arr[index+1:])] or [[]]
+    
+
 class Solution:
     def permute(self, arr: List[int]) -> List[List[int]]:
         allPermsArr, n = [], len(arr)
@@ -13,7 +21,3 @@ class Solution:
         getPermutations(arr, 0, allPermsArr)
         return allPermsArr
         
-
-class Solution:
-    def permute(self, arr: List[int]) -> List[List[int]]:
-        return [[num] + others for index, num in enumerate(arr) for others in self.permute(arr[:index]+arr[index+1:])] or [[]]

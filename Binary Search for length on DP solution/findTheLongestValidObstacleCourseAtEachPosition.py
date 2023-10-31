@@ -1,5 +1,5 @@
-from typing import List
-import bisect
+# Key Idea: Question screams Longest Increasing Subsequence
+
 class Solution:
     def longestObstacleCourseAtEachPosition(self, obstacles: List[int]) -> List[int]:
         longestObstaclesArr = []

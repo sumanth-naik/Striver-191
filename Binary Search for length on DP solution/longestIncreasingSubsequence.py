@@ -1,3 +1,5 @@
+# Key Idea: This is an optimization on top of DP. Think LIS when DP qn needs length of ordered output
+
 import bisect
 class Solution:
     def lengthOfLIS(self, nums) -> int:

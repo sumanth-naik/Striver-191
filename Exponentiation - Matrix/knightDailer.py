@@ -1,3 +1,5 @@
+# Key Idea: Convert the problem to Graphs
+
 import numpy as np
 class Solution:
     def knightDialer(self, n: int) -> int:

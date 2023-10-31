@@ -1,3 +1,5 @@
+# Key Idea: Use the two prunings
+
 class Solution:
     def exist(self, board: List[List[str]], word: str) -> bool:
         lenOfWord, m, n = len(word), len(board), len(board[0])

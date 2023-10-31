@@ -1,3 +1,5 @@
+# Key Idea: Continuous Partitions -> greedy verify -> Binary Search on Answer
+
 class Solution:
     def splitArray(self, nums, k: int) -> int:
         n = len(nums)

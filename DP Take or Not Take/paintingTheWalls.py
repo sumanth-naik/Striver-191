@@ -1,3 +1,6 @@
+# Key Idea 1: Just think from the perspective of paid painter
+# Key Idea 2: If paid painter picks a wall, free painter can finish time[index] walls
+
 class Solution:
     def paintWalls(self, cost: List[int], time: List[int]) -> int:
         n = len(cost)
