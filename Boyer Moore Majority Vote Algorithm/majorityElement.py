@@ -1,3 +1,5 @@
+# Key Idea: If there is a majority elem, at some index it should break even
+# https://gregable.com/2013/10/majority-vote-algorithm-find-majority.html
 class Solution:
     def majorityElement(self, nums):
         major, count = nums[0], 1
@@ -10,27 +12,3 @@ class Solution:
             else:
                 count -= 1
         return major
-
-
-arr = [2,3,4,2,2]
-n = len(arr)
-
-minElem = 0
-minElemCount = 0
-for num in arr:
-    if minElemCount == 0:
-        minElem = num
-        minELemCOunt = 1
-    if(minElem==num):
-        minElemCount += 1
-    else:
-        minElemCount -= 1
-
-count = 0
-for num in arr:
-    if minElem==num: count+=1
-    
-if count> n//2:
-    print(minElem)
-else:
-    print(-1)

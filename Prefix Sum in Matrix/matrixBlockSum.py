@@ -7,8 +7,7 @@ class Solution:
 
         for i in range(1, m+1):
             for j in range(1, n+1):
-                prefixSumMat[i][j] = mat[i-1][j-1] + prefixSumMat[i-1][j] + \
-                                     prefixSumMat[i][j-1] - prefixSumMat[i-1][j-1]
+                prefixSumMat[i][j] = prefixSumMat[i][j-1] + prefixSumMat[i-1][j] - prefixSumMat[i-1][j-1] + mat[i-1][j-1]
         
         squareSumMat = [[0 for _ in range(n)] for _ in range(m)]
         for i in range(m):

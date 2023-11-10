@@ -1,3 +1,7 @@
+# Key Idea 1: Lexicographical order will form a denary tree.
+# Key Idea 2: getSubtreeCount - a special kind of bracketing algo
+# Key Idea 3: Use binary search-ish algo to decide to go down or right
+
 class Solution:
     def findKthNumber(self, n: int, k: int) -> int:
         def getSubtreeCount(curr):

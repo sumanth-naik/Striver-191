@@ -1,4 +1,6 @@
-from typing import List
+# Key Idea 1: Sorting will make the question trivial. Cyclic sort is just another fancy way to sort
+# Key Idea 2: (1) If this number is not in the right place, 
+#             (2) the number's right place is not occupied, SWAP
 
 # ref https://emre.me/coding-patterns/cyclic-sort/
 class Solution:

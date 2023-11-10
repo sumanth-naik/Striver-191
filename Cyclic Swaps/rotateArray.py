@@ -1,10 +1,25 @@
+# Key Idea 1: Each Cycle is independent. 
+# Key Idea 2: Each Cycle starts at 'start' and ends when (start + someJumps*k)%n==start
+#             => (someJumps * k) % n = 0      
+#             => someJumps = n/gcd(n,k)    ----> Each cycle will deal with these many numbers
+# Key Idea 3: There will be gcd(n, k) cycles [n/someJumps]
+
+# Note: We need someJumps - 1 swaps. Each swap will be with start index only. 
+#       In fact, someJump'th swap will be a self swap
+
 class Solution:
     def rotate(self, nums: List[int], k: int) -> None:
-        """
-        Do not return anything, modify nums in-place instead.
-        """
-        for i, num in enumerate([nums[-(k%len(nums))+index] for index in range(len(nums))]):
-            nums[i] = num    
+        if k==0: return
+        n = len(nums)
+        numCycles = gcd(n, k)
+        for start in range(numCycles):
+            for index in range(start, (n*k)//numCycles, k): # Note
+                nums[index%n], nums[start] = nums[start], nums[index%n]
+
+
+
+
+# Key Idea: reverse each part once and reverse the whole thing
 
 class Solution:
     def rotate(self, nums: List[int], k: int) -> None:
@@ -17,16 +32,3 @@ class Solution:
         reverse(n-k, n-1)
         reverse(0, n-1)
 
-class Solution:
-    def rotate(self, nums: List[int], k: int) -> None:
-        numSwaps, n, startIndex = 0, len(nums), 0
-        # This is needed to not run the same loop twice. Loops are always crossing and never disjoint.
-        while numSwaps<n:
-            currentIndex, currentIndexVal = startIndex, nums[startIndex]
-            while True:
-                nextIndex = (currentIndex + k)%n
-                currentIndex, currentIndexVal, nums[nextIndex] = nextIndex, nums[nextIndex], currentIndexVal
-                numSwaps += 1
-                if currentIndex==startIndex: break
-            startIndex += 1
-        

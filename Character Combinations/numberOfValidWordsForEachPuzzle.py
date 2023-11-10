@@ -1,47 +1,49 @@
-from typing import List
-from collections import defaultdict
+# Key Idea: Create subsets of all combinations of last six chars of puzzle. Or with the first and check the counter
+# Note: dont forget to include only first count
 
 class Solution:
     def findNumOfValidWords(self, words: List[str], puzzles: List[str]) -> List[int]:
 
-        masksMapOfWords = defaultdict(int)
-        for word in words:
-            bitMaskOfWord = 0
-            for char in set(word):
-                bitMaskOfWord |= 1<<(ord(char)-ord('a'))
-            masksMapOfWords[bitMaskOfWord] += 1
+        @cache
+        def bitMap(word):
+            return reduce(lambda acc, char: acc | (1<<(ord(char)-ord('a'))), word, 0)
 
-        counts = []
-        for puzzle in puzzles:
-            count = 0
-            for bitMaskOfSubset in range(2**(len(puzzle)-1)):
-                bitMaskOfPuzzle = (1<<(ord(puzzle[0])-ord('a')))
-                for index, char in enumerate(puzzle[1:]):
-                    if bitMaskOfSubset & (1<<(index)):
-                        bitMaskOfPuzzle |= (1<<(ord(char)-ord('a')))
-                count += masksMapOfWords[bitMaskOfPuzzle]
-            counts.append(count)
-        return counts  
+        @cache
+        def solve(puzzle):
+            onlyFirst, countWithLastSix = bitMap(puzzle[0]), 0
+            subsetOfLastSix = lastSix = bitMap(puzzle[1:])
+            while subsetOfLastSix:
+                countWithLastSix += wordsCounter[onlyFirst | subsetOfLastSix]
+                subsetOfLastSix = (subsetOfLastSix - 1) & lastSix
+            return wordsCounter[onlyFirst] + countWithLastSix # Note
+        
+        wordsCounter = Counter(bitMap(word) for word in words)
+        return list(map(solve, puzzles))
 
+
+
+
+'''Other Idea'''
+# Key Idea: Use trie with insertion storing count. In search, use strictly take for first char, for other chars, both take/not-take
 
 class Trie:
     def __init__(self):
         self.children = defaultdict(Trie)
         self.count = 0
     
-    def insert(self, chars):
+    def insert(self, word):
         node = self
-        for char in chars:
+        for char in word:
             node = node.children[char]
         node.count += 1
     
-    def search(self, node, chars, index, firstChar):
-        if index == len(chars): return node.count
+    def search(self, node, word, index, firstChar):
+        if index == len(word): return node.count
         count = 0
-        if chars[index] in node.children:
-            count += self.search(node.children[chars[index]], chars, index+1, firstChar)
-        if chars[index]!=firstChar:
-            count += self.search(node, chars, index+1, firstChar)
+        if word[index] in node.children: # take
+            count += self.search(node.children[word[index]], word, index+1, firstChar)
+        if word[index]!=firstChar: # not take
+            count += self.search(node, word, index+1, firstChar)
         return count
     
 class Solution:
@@ -49,8 +51,5 @@ class Solution:
         trie = Trie()
         for word in words: 
             trie.insert(sorted(set(word)))
-        counts = []
-        for puzzle in puzzles: 
-            counts.append(trie.search(trie, sorted(puzzle), 0, puzzle[0]))
-        return counts
-        
+        return [trie.search(trie, sorted(puzzle), 0, puzzle[0]) for puzzle in puzzles]
+
