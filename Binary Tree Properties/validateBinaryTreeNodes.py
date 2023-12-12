@@ -16,7 +16,7 @@ Necessary Conditions:
 class Solution:
     def validateBinaryTreeNodes(self, n: int, leftChild: List[int], rightChild: List[int]) -> bool:
         indegreeArr = [0]*n
-        for index, (left, right) in enumerate(zip(leftChild, rightChild)):
+        for left, right in zip(leftChild, rightChild):
             if left!=-1:
                 indegreeArr[left] += 1
             if right!=-1:

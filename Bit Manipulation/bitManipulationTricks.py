@@ -50,7 +50,7 @@ def getLSB(x):
 
 
 '''
-Idea : similar to subsetEnumeration but dont 
+Idea : similar to subsetEnumeration but AND with subArrayMask 
 bitmask = 10110
 {10110, 10101 & 10110 = 10100, 10011 & 10100 = 10000}
 10110 -> 00110
